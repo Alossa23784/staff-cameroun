@@ -1,0 +1,15 @@
+Options -Indexes
+Options -MultiViews
+
+RewriteEngine On
+
+# Rediriger HTTP vers HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Ne pas réécrire les fichiers/dossiers qui existent
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Tout router vers index.php
+RewriteRule ^(.*)$ index.php [QSA,L]
